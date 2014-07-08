@@ -1,0 +1,47 @@
+{
+	"name": "unitsinside",
+	"url": "http://ashmigelski.github.io/units-inside",
+	"title": "Units Inside",
+	"description": "Simple app for detecting units occurence inside geofences",
+	"author": {
+		"name": "ashmigelski <Aleksey Shmigelski>"
+	},
+	"external": {
+		"git": "https://github.com/ashmigelski/units_inside"
+	},
+	"dependencies": {
+	},
+	"keywords": [
+		"wialon",
+		"wialon-apps"
+	],
+	"version": "1.1",
+	"release_date": "2014-06-07",
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/ashmigelski/units-inside/blob/master/LICENSE-MIT"
+		}
+	],
+	"modules": [
+		"sdk"
+	],
+	"params": [
+		"Active SID",
+		"Base URL",
+		"Host URL"
+	],
+	"language": [
+		"en"
+	],
+	"browser": {
+		"ie": "9+",
+		"opera": "10+",
+		"safari": "10+",
+		"chrome": "20+",
+		"firefox": "15+"
+	},
+	"logo": "",
+	"images_path": "",
+	"desc_path": ""
+}
