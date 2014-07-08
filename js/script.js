@@ -8,9 +8,26 @@ function disableUI (disable, message, logout) {
 	}
 	if (logout) {
 		wialon.core.Session.getInstance().logout(disableUI);
-	} else {
-		$("#login").prop("disabled", disable ? true : false);
 	}
+	$("#login").prop("disabled", disable);
+	$("#logout").prop("disabled", !disable);
+}
+
+/// Fetch varable from 'GET' request
+function getHtmlVar(name) {
+	var result = "";
+	if (name) {
+		var pairs = decodeURIComponent(document.location.search.substr(1)).split("&");
+		for (var i = 0; i < pairs.length; i++) {
+			var pair = pairs[i].split("=");
+			if (pair[0] == name) {
+				pair.splice(0, 1);
+				result = pair.join("=");
+				break;
+			}
+		}
+	}
+	return result;
 }
 
 /// Callback after getting units
@@ -45,7 +62,12 @@ function getResourcesCallback (code, data) {
 		if ("items" in data) {
 			storage.resources = data.items;
 			// construct geofences table for all resources
-			var html = "";
+			var html =
+				"<div class='row head'>" +
+					"<div class='name'>Geofence</div>" +
+					"<div class='units'>Units</div>" +
+				"</div>";
+
 			// resources loop;
 			for (var i = 0; i < data.items.length; i++) {
 				var res = data.items[i];
@@ -127,9 +149,7 @@ function finishProcess () {
 				}, this, storage.units[i]));
 			}
 		}
-		wialon.core.Remote.getInstance().finishBatch(function () {
-			disableUI(false, "", 1);
-		}, "getUnitsResources");
+		wialon.core.Remote.getInstance().finishBatch(null, "getUnitsResources");
 	} else {
 		disableUI(false, "Units or resources not found", 1);
 	}
@@ -156,14 +176,35 @@ function startProcess() {
 	}
 }
 
+/// Do login
+function login (evt) {
+	if ($(this).prop("disabled")) {
+		evt.preventDefault();
+	} else {
+		disableUI(true);
+		startProcess();
+	}
+}
+
+/// Do logout
+function logout (evt) {
+	if ($(this).prop("disabled")) {
+		evt.preventDefault();
+	} else if (wialon && wialon.core.Session.getInstance().getId()) {
+		$(this).prop("disabled", true);
+		wialon.core.Session.getInstance().logout(disableUI);
+	}
+}
+
 /// When DOM ready
 $(document).ready(function () {
-	$("#login").click(function (evt) {
-		if ($(this).prop("disabled")) {
-			evt.preventDefault();
-		} else {
-			disableUI(true);
-			startProcess();
-		}
-	});
+	// toDo: dynamic load wialon.js and activate UI for cases
+	// case sid
+	// case authHash
+	// case user & password or no-params
+	$("#login").click(login);
+	$("#logout").click(logout);
+
+	$("#login-form").show();
+	disableUI(false);
 });

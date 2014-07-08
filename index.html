@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8"> 
-		<title>Units inside!</title>
+		<meta charset="utf-8">
+		<title>Units Inside</title>
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
 
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script src="js/script.js"></script>
 		<script src="https://hst-api.wialon.com/wsdk/script/wialon.js"></script>
+
+		<script src="js/script.js"></script>
 	</head>
 	<body>
-		<div id="main">
+		<div id="login-form" style="display: none;">
 			Username: <input type="text" id="username" value="Cebit"/>
 			Password: <input type="password" id="password" value="cebit"/>
-			<input type="button" value="Process" id="login"/>
+			<input type="button" disabled id="login" value="Login"/>
+			<input type="button" disabled id="logout" value="Logout"/>
 		</div>
 		<div id="result"></div>
 	</body>
