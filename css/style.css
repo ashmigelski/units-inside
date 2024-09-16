@@ -10,6 +10,10 @@ body, html, div, pre, button {
 	margin: 40px 0;
 }
 
+#main #token {
+	width: 550px;
+}
+
 #result .row {
 	width: 620px;
 	margin:0 auto;

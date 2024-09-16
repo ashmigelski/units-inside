@@ -142,17 +142,16 @@ function startProcess() {
 	wialon.core.Session.getInstance().initSession(url);
 	wialon.core.Session.getInstance().loadLibrary("resourceZones");
 
-	var uname = $("#username").val(); // get username from input
-	var pass = $("#password").val(); // get password from input
-	if(!uname){ // if username is empty
-		disableUI(false, "Enter username");
+	var token = $("#token").val(); // get token value from input
+	if(!token){ // if token is empty
+		disableUI(false, "Enter token");
 	} else {
 		storage = {
 			units: [],
 			resources: []
 		};
 		$("#result").empty();
-		wialon.core.Session.getInstance().login(uname, pass, "", loginCallback);
+		wialon.core.Session.getInstance().loginToken(token, "", loginCallback);
 	}
 }
 
